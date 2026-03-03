@@ -38,7 +38,7 @@ func (h *Handler) HandleLoginPost(c *gin.Context) {
 	}
 
 	SetSessionValue(c, "userId", user.ID)
-	setSessionValue(c, "username", user.Username)
+	SetSessionValue(c, "username", user.Username)
 	c.Redirect(http.StatusSeeOther, "/admin")
 }
 
