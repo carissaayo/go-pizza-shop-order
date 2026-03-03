@@ -7,7 +7,7 @@ import (
 )
 
 func (h *Handler) AuthMiddleware() gin.HandlerFunc {
-	return func(ctx *gin.Context) {
+	return func(c *gin.Context) {
 		userId := GetSessionString(c, "userID")
 		if userId == "" {
 			c.Redirect(http.StatusSeeOther, "/login")
@@ -15,10 +15,10 @@ func (h *Handler) AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		user, err := h.users.GetUserByID(userID)
+		_, err := h.users.GetUserByID(userId)
 
 		if err != nil {
-			ClearSession(c)
+			clearSession(c)
 			c.Redirect(http.StatusSeeOther, "/login")
 			c.Abort()
 			return

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +12,7 @@ type LoginData struct {
 }
 
 type AdminDashboardData struct {
-	USername string
+	Username string
 }
 
 func (h *Handler) HandleLoginGet(c *gin.Context) {
@@ -37,7 +38,7 @@ func (h *Handler) HandleLoginPost(c *gin.Context) {
 		return
 	}
 
-	SetSessionValue(c, "userId", user.ID)
+	SetSessionValue(c, "userID", fmt.Sprintf("%v", user.ID))
 	SetSessionValue(c, "username", user.Username)
 	c.Redirect(http.StatusSeeOther, "/admin")
 }
@@ -55,6 +56,6 @@ func (h *Handler) ServeAdminDashboard(c *gin.Context) {
 	username := GetSessionString(c, "username")
 
 	c.HTML(http.StatusOK, "admin.tmpl", AdminDashboardData{
-		USername: username,
+		Username: username,
 	})
 }
