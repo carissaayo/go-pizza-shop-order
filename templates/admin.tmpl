@@ -51,7 +51,41 @@
 
                                 </tr>
                             </thead>
-                            <tbody class="bg-white/70 divide-y divide-gray-100"></tbody>
+                            <tbody class="bg-white/70 divide-y divide-gray-100">
+                                {{range .Orders}}
+                                <tr class="hover:bg-gray-50/50 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="/customer/{{.ID}}" class="text-blue-600 hover:text-blue-700 font-medium hover:underline">
+                                            {{.ID}}
+                                        </a>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-medium">
+                                        {{.Status}}
+                                    </td>
+                                    
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-medium">
+                                        {{.CustomerName}}
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-medium">
+                                        {{.Phone}}
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-medium">
+                                        {{.Address}}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700 ">
+                                        <div class="space-y-1">
+                                            {{range $index,$pizza .= .Items}}
+                                            <div class="flex items-center gap-2">
+                                                <span class="ext-gray-400">#{{add $index 1}}</span>
+                                                <span class="truncate">{{$pizza.Size}} {{$pizza.Pizza}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                 </div>
             </div>
